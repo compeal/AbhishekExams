@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="org.zorba.entity.Department" table="departments">
+        <!-- id tag used to denote primary key of the table -->
+        <id name="departmentID" column="department_id" length="6">
+            <!-- auto generated value -->
+            <generator class="increment"/>
+        </id>
+
+        <property name="departmentName" column="department_name" not-null="true" length="255"/>
+
+        <property name="departmentLocation" column="department_loaction" unique="true" length="5"/>
+
+        <set name="teacherSet" table="teacher_department_mapping" cascade="all" lazy="true">
+            <key>
+                <column name="department_id" not-null="true"/>
+            </key>
+            <many-to-many entity-name="org.zorba.entity.Teacher">
+                <column name="teacher_id" not-null="true"/>
+            </many-to-many>
+        </set>
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- Mapping with entity class with database tables -->
+    <class name="org.zorba.entity.Teacher" table="teacher">
+        <!-- id tag used to denote primary key of the table -->
+        <id name="teacherId" column="teacher_id" length="6">
+            <!-- auto generated value -->
+            <generator class="increment"/>
+        </id>
+
+        <!-- Define mapping for other columns -->
+        <property name="teacherName" column="teacher_name" not-null="true" length="255"/>
+
+        <property name="teacherSpecialization" column="teacher_specialization"/>
+
+        <property name="teacherEmail" column="teacher_email" length="255"/>
+
+        <property name="teacherMobile" column="teacher_mobile"/>
+        <property name="teacherAddress" column="teacher_address" length="255"/>
+
+
+        <set name="students" table="students"
+             cascade="all" lazy="true" inverse="true">
+            <key>
+                <column name="student_id"/>
+            </key>
+            <one-to-many class="org.zorba.entity.Student"/>
+        </set>
+
+        <set name="department" table="teacher_department_mapping" cascade="all" lazy="true">
+            <key>
+                <column name="teacher_id" />
+            </key>
+            <many-to-many entity-name="org.zorba.entity.Department">
+                <column name="department_id" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

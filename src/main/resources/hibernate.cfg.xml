@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--JDBC Connection Pool Size-->
+        <property name="connection.pool_size">5</property>
+
+        <!-- Provide Driver class Name -->
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+
+        <!--Database url-->
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate_1016_assignment</property>
+
+        <!--Database User Name-->
+        <property name="hibernate.connection.username">root</property>
+
+        <!--Database Password-->
+        <property name="hibernate.connection.password">bibash</property>
+
+    <!--Helps to convert Object to corresponding SQL Query-->
+    <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+    <!--Post conversion to SQL query we need to display at our console / log file-->
+    <property name="show_sql">true</property>
+
+    <!--Which indicates on start of server or execution we are going to create all the entity (table)-->
+    <!--
+        1. CREATE - it will drop all the tables and re-create again and again
+        2. UPDATE - it will not going to drop always but going to create if the table not exists
+        3. VALIDATE - it will not drop any tables rather it will create once
+                      it is not there along with it will validate every time if any changes has been done in the mapping.
+    -->
+    <property name="hbm2ddl.auto">create</property>
+
+    <!-- Set current Session Context -->
+    <property name="current_session_context_class">thread</property>
+
+
+    <!--Configure all the mapping file here so that hibernate can recognize all the entity-->
+
+        <mapping resource="hibernate-mapping/student.hbm.xml"/>
+        <mapping resource="hibernate-mapping/teacher.hbm.xml"/>
+        <mapping resource="hibernate-mapping/department.hbm.xml"/>
+
+</session-factory>
+        </hibernate-configuration>

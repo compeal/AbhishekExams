@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- Mapping with entity class with database tables -->
+    <class name="org.zorba.entity.Student" table="students">
+        <!-- id tag used to denote primary key of the table -->
+        <id name="studentId" column="student_id" length="6">
+            <!-- auto generated value -->
+            <generator class="increment"/>s
+        </id>
+
+        <!-- Define mapping for other columns -->
+        <property name="studentName" column="student_name" not-null="true" length="255"/>
+
+        <property name="studentLocation" column="student_location"  length="255"/>
+
+        <property name="studentCourse" column="student_course"/>
+
+        <property name="studentEmail" column="student_email" length="255"/>
+
+        <property name="studentMobile" column="student_mobile"/>
+
+        <property name="studentScore" column="student_score"/>
+
+        <many-to-one name="teacher" class="org.zorba.entity.Teacher"
+                     cascade="all">
+            <column name="teacher_name"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>
